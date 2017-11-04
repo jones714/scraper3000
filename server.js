@@ -13,6 +13,7 @@ var cheerio = require("cheerio");
 // Set mongoose to leverage built in JavaScript ES6 Promises
 mongoose.Promise = Promise;
 
+const PORT = process.env.PORT || 8000;
 
 // Initialize Express
 var app = express();
@@ -36,7 +37,7 @@ app.engine("hbs", exphbs({
 app.set("view engine", ".hbs");
 
 // Database configuration with mongoose
-mongoose.connect("mongodb://heroku_grcx8zcf:3pk197of9pgfc3arq2qtcc0ecb@ds149874.mlab.com:49874/heroku_grcx8zcf");
+mongoose.connect("mongodb://heroku_2jdkrmz1:poa3hg2luok5bbtje1nsql5btr@ds147265.mlab.com:47265/heroku_2jdkrmz1");
 var db = mongoose.connection;
 
 // Show any mongoose errors
@@ -175,7 +176,7 @@ app.post("/comment/:id", function (req, res) {
   });
 });
 
-var PORT = process.env.PORT || 3000;
+
 app.listen(PORT, function () {
   console.log("App running on port", PORT);
 });
