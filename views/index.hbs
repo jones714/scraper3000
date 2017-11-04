@@ -1,0 +1,39 @@
+  <nav>
+    <div class="nav-wrapper yellow lighten-2">
+      <a href="#" class="brand-logo left blue-grey-text">Scraper3000</a>
+      <ul id="nav-mobile" class="right">
+        <li><a href="/scrape" class="deep-orange accent-2 blue-grey-text text-darken-3 waves-effect waves-light btn">Re-scrape</a></li>
+        <li><a href="/saved" class="blue-grey-text">Your Articles</a></li>
+      </ul>
+    </div>
+  </nav>
+
+<div class="container">
+  {{#if articles}}
+    {{#each articles}}
+    <div class="card blue-grey darken-3">
+      <div class="card-content white-text">
+        <span class="card-title yellow-text">
+          <a href="{{this.link}}" target="_blank">{{this.title}}</a>
+        </span>
+        <p>{{this.summary}}</p>
+      </div>
+      <div class="card-action deep-blue-text text-accent-3">
+        {{#if this.saved}}
+        <a href="#" class="btn disabled yellow accent-2 blue-grey-text text-darken-3">Saved</a> 
+        {{else}}
+        <form method="POST" action="/save/index/{{this._id}}">
+          <input type="hidden" name="saved" value="true">
+          <button type="submit" class="btn yellow accent-2 blue-grey-text text-darken-3">Save</button>
+        </form>
+        {{/if}}
+      </div>
+    </div>
+    {{/each}}
+  {{else}}
+    <div class="card-panel blue-grey darken-3 white-text">
+      <h2>Come back Later!</h2>
+      <p>Scraper3000 error: NO Data found. Go ahead and <a href="/scrape" class="deep-orange accent-2 blue-grey-text text-darken-3 waves-effect waves-light btn">scrape</a> some!</p>
+    </div>
+  {{/if}}
+</div>

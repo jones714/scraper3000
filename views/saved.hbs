@@ -1,0 +1,63 @@
+<nav>
+  <div class="nav-wrapper orange lighten-2">
+    <a href="#" class="brand-logo left blue-grey-text">Scrapedot</a>
+    <ul id="nav-mobile" class="right">
+      <li><a href="/scrape" class="deep-orange accent-2 blue-grey-text text-darken-3 waves-effect waves-light btn">Re-scrape</a></li>
+      <li><a href="/" class="blue-grey-text">Home</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container">
+  {{#if articles}}
+    {{#each articles}}
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title orange-text">
+          <a href="{{this.link}}" target="_blank">{{this.title}}</a>
+        </span>
+        <p>{{this.summary}}</p>
+      </div>
+      <div class="card-action deep-orange-text text-accent-3">
+        <form method="POST" action="/save/saved/{{this._id}}">
+          {{#if this.comments}}
+          <a href="#modal{{this._id}}" class="btn modal-trigger orange accent-2 blue-grey-text text-darken-3">{{this.comments.length}} Comments</a>
+          {{else}}
+          <a href="#modal{{this._id}}" class="btn modal-trigger orange accent-2 blue-grey-text text-darken-3">Comment</a>
+          {{/if}}
+          <input type="hidden" name="saved" value="false">
+          <button type="submit" class="btn deep-orange accent-2 blue-grey-text text-darken-3">Unsave article</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="modal{{this._id}}" class="modal">
+      <a class="modal-close right"><i class="material-icons">close</i></a>
+      <div class="modal-content">
+        <h4>Comments:</h4>
+        {{#if this.comments.length}}
+        <ul class="collection">
+          {{#each this.comments}}
+          <li class="collection-item">{{this.body}}</li>
+          {{/each}}
+        </ul>
+        {{else}}
+        <p>No comments yet! Leave the first one below.</p>
+        {{/if}}
+        <form method="POST" action="/comment/{{this._id}}">
+          <div class="input-field">
+            <textarea name="body" id="commentfield" class="materialize-textarea"></textarea>
+            <label for="commentfield">Your comment</label>
+            <button type="submit" class="btn orange accent-2 blue-grey-text text-darken-3">submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    {{/each}}
+  {{else}}
+    <div class="card-panel blue-grey darken-3 white-text">
+      <h2>Nothing to see here!</h2>
+      <p>Ya didn't save any articles yet, ya numbskull. Go back <a href="/" class="deep-orange accent-2 blue-grey-text text-darken-3 waves-effect waves-light btn">home</a> and save some!</p>
+    </div>
+  {{/if}}
+</div>

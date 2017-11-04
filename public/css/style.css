@@ -1,0 +1,11 @@
+a {
+  color: brown;
+}
+
+a:hover {
+  color: green;
+}
+
+body {
+  background-color: #eceff1;
+  background-image: url("https://www.nasa.gov/sites/default/files/thumbnails/image/hubble_friday_04152016.jpg");
